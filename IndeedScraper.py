@@ -60,20 +60,29 @@ def saferequest(url):
     #endregion - NordVPN
     return(get)
 
+with open('D:\Documents\Email_Credentials\SenderEmail.txt', 'r', encoding="utf-8") as cred1: 
+    sender = str(cred1.read())
+cred1.close()
+with open('D:\Documents\Email_Credentials\RecieverEmail.txt', 'r', encoding="utf-8") as cred2: 
+    reciever = str(cred2.read())
+cred2.close()
+with open('D:\Documents\Email_Credentials\Password.txt', 'r', encoding="utf-8") as cred3: 
+    password = str(cred3.read())
+cred3.close()
 def EmailAlert(subject, body):
     #required libraries - smtlib, ssl
     #optional libraries - sys, traceback (for handling errors)
     port = 0
     smpt_server = 'smtp.gmail.com'
-    sender_email = "SoupsPyBot@gmail.com"
-    receiver_email = "Caboose12000@gmail.com"
-    password = '25#3LX47ES@R%UpE81FQ'
+    sender_email = sender
+    receiver_email = reciever
+    sender_password = password
     SUBstring = str(subject)
     BODstring = str(body)
     message = 'Subject: {}\n\n{}'.format(SUBstring, BODstring)
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL(smpt_server, port, context=context) as server:
-        server.login(sender_email, password)
+        server.login(sender_email, sender_password)
         server.sendmail(sender_email, receiver_email, message)
 
 JobTitles = ['data+analyst', 'data+scientist', 'database+administrator', 'machine+learning+engineer', 'data+engineer']
